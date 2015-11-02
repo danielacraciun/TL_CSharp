@@ -1,0 +1,5 @@
+/home/dana/Dropbox/MAP/ToyLanguage/ToyLanguage/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/dana/Dropbox/MAP/ToyLanguage/ToyLanguage/bin/Debug/ToyLanguage.exe.mdb
+/home/dana/Dropbox/MAP/ToyLanguage/ToyLanguage/bin/Debug/ToyLanguage.exe
+/home/dana/Dropbox/MAP/ToyLanguage/ToyLanguage/obj/x86/Debug/ToyLanguage.exe
+/home/dana/Dropbox/MAP/ToyLanguage/ToyLanguage/obj/x86/Debug/ToyLanguage.exe.mdb
