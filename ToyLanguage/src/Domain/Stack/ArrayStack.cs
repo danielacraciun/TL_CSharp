@@ -1,48 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ArrayStack: IStack
+	public class ArrayStack<T>: IStack<T>
 	{
-		private Object[] elem;
-		private int nrElem;
+		private Stack<T> elements;
 
-		public ArrayStack ()
-		{
-			elem = new Object[20];
-			nrElem = 0;
-		}
-			
-		public void Push(Object o) {
-			elem[nrElem++] = o;
-		}
-			
-		public Object Pop() {
-			if (nrElem > 0)
-				return elem[--nrElem];
-			return null;
-		}
-			
-		public Boolean isEmpty() {
-			return nrElem == 0;
-		}
-			
-		public Object Top() {
-			if (nrElem > 0)
-				return elem[nrElem - 1];
-			return null;
+		public ArrayStack () {
+			elements = new Stack<T>();
 		}
 
-		public override String ToString ()
-		{
-			String ListStr = "Execution Stack: ";
-
-			for (int i = nrElem - 1; i >= 0; i--) {
-				ListStr += elem[i].ToString ();
-				ListStr += "; ";
+		public T Pop () {
+			if (elements.Count > 0) {
+				return  elements. Pop();
 			}
+			throw new EmptyArrayException ();
+		}
 
-			return ListStr;
+		public T Peek () {
+			if (elements.Count > 0) {
+				return  elements. Peek();
+			}
+			throw new EmptyArrayException ();
+		}
+
+		public void Push (T obj) {
+			elements.Push (obj);
+		}
+
+		public int Count {
+			get {
+				return elements.Count;
+			}
+		}
+
+		public override string ToString () {
+			return "Execution Stack: " + string.Join(";", elements) + " ";
 		}
 			
 	}

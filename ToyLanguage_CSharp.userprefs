@@ -1,11 +1,10 @@
 ﻿<Properties StartupItem="ToyLanguage/ToyLanguage.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ToyLanguage/Program.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ToyLanguage/src/Domain/Dictionary/MyDictionary.cs">
     <Files>
-      <File FileName="ToyLanguage/src/Domain/Dictionary/ArrayDictionary.cs" Line="1" Column="1" />
-      <File FileName="ToyLanguage/src/Controller/MyController.cs" Line="1" Column="1" />
-      <File FileName="ToyLanguage/src/Domain/PrgState/PrgState.cs" Line="1" Column="1" />
-      <File FileName="ToyLanguage/Program.cs" Line="34" Column="7" />
+      <File FileName="ToyLanguage/src/Domain/Dictionary/MyDictionary.cs" Line="7" Column="19" />
+      <File FileName="ToyLanguage/src/Domain/List/MyList.cs" Line="59" Column="3" />
+      <File FileName="ToyLanguage/src/Domain/Stack/MyStack.cs" Line="10" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

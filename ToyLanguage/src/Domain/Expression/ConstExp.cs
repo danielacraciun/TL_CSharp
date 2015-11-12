@@ -11,11 +11,11 @@ namespace ToyLanguage
 			this.nr = newnr;
 		}
 
-		public int eval(IDictionary tbl) {
+		public int eval(IDictionary<String, int> tbl) {
 			return nr;
 		}
 
-		override public String ToString() {
+		public override String ToString() {
 			return nr.ToString ();
 		}
 

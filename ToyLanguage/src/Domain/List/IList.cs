@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Collections;
 
 namespace ToyLanguage
 {
-	public interface IList: System.Collections.IEnumerable
-	{
-		void Add(Object o);
-		bool Contains (Object o);
-		int Length { get; }
-		Object this [ int index ] { get; set; }
+	public interface IList<T>: IEnumerable {
+		void Add (T e);
+
+		bool Contains (T e);
+
+		int Count{ get; }
+
+		T this [int index]{ get; set; }
 	}
 }
 

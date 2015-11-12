@@ -11,12 +11,12 @@ namespace ToyLanguage
 			this.id = newid;
 		}
 
-		public int eval(IDictionary tbl) {
+		public int eval(IDictionary<String, int> tbl) {
 			if (tbl.containsKey(id)) return (int) tbl[id];
-			return 0;
+			throw new UninitializedVariableException ();
 		}
 
-		override public String ToString() {
+		public override String ToString() {
 			return id;
 		}
 

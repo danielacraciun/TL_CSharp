@@ -1,55 +1,44 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ArrayList: IList
+	public class ArrayList<T>: IList<T>
 	{
-		private Object[] elem;
-		private int nrElem;
+		private List<T> elements;
 
-		public ArrayList()
-		{
-			elem = new Object[20];
-			nrElem = 0;
-		}
-			
-
-		public void Add(Object o) {
-			elem [nrElem++] = o;
+		public ArrayList () {
+			elements = new List<T> ();
 		}
 
-		public Boolean Contains(Object o) {
-			for (int i = 0; i < nrElem; i++)
-				if (elem [i] == o)
-					return true;
-			return false;
+		public void Add (T e) {
+			elements.Add (e);
 		}
 
-		public int Length {
-			get { return nrElem; }
+		public bool Contains (T e) {
+			return elements.Contains (e);
 		}
 
-		public override String ToString ()
-		{
-			String ListStr = "Output: ";
-			foreach (var item in this)
-			{
-				ListStr += item;
-				ListStr += "; ";
+		public int Count {
+			get {
+				return elements.Count;
 			}
-			return ListStr;
 		}
 
-		public Object this[int index] {
-			get { 
-				if (index < nrElem && index >= 0)
-					return elem [index];
-				return null;
+		public T this [int index] {
+			get {
+				if (index < elements.Count && index >= 0) {
+					return elements [index];
+				}
+				throw new Exception();
 			}
-			set { 				
-				if (index < nrElem && index >= 0)
-					elem [index] = value;
+			set {
+				if (index < elements.Count && index >= 0) {
+					elements [index] = value;
+				} else {
+					elements.Add (value);
+				}
 			}
 		}
 
@@ -57,22 +46,26 @@ namespace ToyLanguage
 			return new ALEnumerator (this);
 		}
 
+		public override string ToString () {
+			return "Print list: " + string.Join(", ", elements);
+		}
+
 		private class ALEnumerator : IEnumerator {
 			private int cursor;
-			private ArrayList al;
+			private ArrayList<T> al;
 
-			public ALEnumerator(ArrayList al) {
+			public ALEnumerator(ArrayList<T> al) {
 				this.al = al;
 				cursor = -1;
 			}
 
 			public bool MoveNext() {
 				cursor++;
-				return cursor < al.nrElem;
+				return cursor < al.Count;
 			}
 
 			public Object Current {
-				get { return al.elem [cursor]; }
+				get { return al[cursor]; }
 			}
 
 			public void Reset() {

@@ -15,15 +15,19 @@ namespace ToyLanguage
 			this.op = op;
 		}
 
-		public int eval(IDictionary tbl) {
+		public int eval(IDictionary<String, int> tbl) {
 			if (op == '+') return (e1.eval(tbl) + e2.eval(tbl));
 			if (op == '-') return (e1.eval(tbl) - e2.eval(tbl));
 			if (op == '*') return (e1.eval(tbl) * e2.eval(tbl));
-			if (op == '/') return (e1.eval(tbl) / e2.eval(tbl));
+			if (op == '/') {
+				if (e2.eval (tbl) == 0)
+					throw new DivisionByZeroException ();
+				return (e1.eval (tbl) / e2.eval (tbl));
+			}
 			return 0;
 		}
 
-		override public String ToString() {
+		public override String ToString() {
 			return e1.ToString() + " " + op + " " + e2.ToString();
 		}
 

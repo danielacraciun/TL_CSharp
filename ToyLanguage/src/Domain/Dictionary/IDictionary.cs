@@ -2,12 +2,15 @@
 
 namespace ToyLanguage
 {
-	public interface IDictionary: System.Collections.IEnumerable
+	public interface IDictionary<K, V>: System.Collections.IEnumerable
 	{
 		int Count { get; }
-		void Add(Object key, Object value);
-		Boolean containsKey(Object key);
-		object this[ object key ] { get; set; }
+
+		void Add (K key, V value);
+
+		bool containsKey (K key);
+
+		V this [K key] { get; set; }
 	}
 }
 

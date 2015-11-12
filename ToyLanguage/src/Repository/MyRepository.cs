@@ -9,7 +9,7 @@ namespace ToyLanguage
 
 		public MyRepository(PrgState[] states) {
 			prgStates = states;
-			nrPrg = states.Length;
+			nrPrg = 1;
 		}
 
 		public MyRepository() {
@@ -19,8 +19,8 @@ namespace ToyLanguage
 
 		public PrgState getCrtPrg() {
 			if (nrPrg > 0)
-				return prgStates[0];
-			return null;
+				return this.prgStates [0];
+			throw new RepositoryException ();
 		}
 
 		public void add(PrgState ps) {

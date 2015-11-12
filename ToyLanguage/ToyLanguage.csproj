@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Mono.C5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -54,6 +55,26 @@
     <Compile Include="src\Domain\PrgState\PrgState.cs" />
     <Compile Include="src\Repository\MyRepository.cs" />
     <Compile Include="src\Controller\MyController.cs" />
+    <Compile Include="src\Domain\Statement\DecStmt.cs" />
+    <Compile Include="src\Domain\Expression\CompExp.cs" />
+    <Compile Include="src\Repository\RepositoryException.cs" />
+    <Compile Include="src\Views\MyConsole.cs" />
+    <Compile Include="src\Domain\Expression\UninitializedVariableException.cs" />
+    <Compile Include="src\Domain\Expression\DivisionByZeroException.cs" />
+    <Compile Include="src\Domain\ModelException.cs" />
+    <Compile Include="src\Controller\ControllerException.cs" />
+    <Compile Include="src\Domain\Stack\EmptyArrayException.cs" />
+    <Compile Include="src\Domain\Dictionary\UndefinedKeyException.cs" />
+    <Compile Include="src\Views\ConsoleException.cs" />
+    <Compile Include="src\Domain\Expression\LogicExp.cs" />
+    <Compile Include="src\Domain\Expression\ReadExp.cs" />
+    <Compile Include="src\Domain\Statement\IfThenStmt.cs" />
+    <Compile Include="src\Domain\Statement\SkipStmt.cs" />
+    <Compile Include="src\Domain\Statement\WhileStmt.cs" />
+    <Compile Include="src\Domain\Statement\SwitchStmt.cs" />
+    <Compile Include="src\Domain\Dictionary\MyDictionary.cs" />
+    <Compile Include="src\Domain\List\MyList.cs" />
+    <Compile Include="src\Domain\Stack\MyStack.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -62,5 +83,6 @@
     <Folder Include="src\Repository\" />
     <Folder Include="src\Controller\" />
     <Folder Include="src\Domain\PrgState\" />
+    <Folder Include="src\Views\" />
   </ItemGroup>
 </Project>

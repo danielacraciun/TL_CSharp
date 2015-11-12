@@ -4,8 +4,9 @@ namespace ToyLanguage
 {
 	public interface Exp
 	{
-		int eval(IDictionary tbl);
-		String ToString();
+		int eval (IDictionary<String, int> tbl);
+
+		String ToString ();
 	}
 }
 

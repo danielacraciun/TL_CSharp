@@ -1,107 +1,54 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ArrayDictionary: IDictionary
+	public class ArrayDictionary<K, V>: IDictionary<K, V>
 	{
-		private Object[] keys;
-		private Object[] values;
-		private int nrElem;
+		private Dictionary<K, V> elements;
 
-		public ArrayDictionary ()
-		{
-			keys = new Object[20];
-			values = new Object[20];
-			nrElem = 0;
+		public ArrayDictionary () {
+			elements = new Dictionary<K, V> ();
 		}
 
-		public object this[object key]
-		{
-			get
-			{   
-				for (int i = 0; i < nrElem; i++) {
-					if (keys[i] == key)
-						return values[i];
-				}
-
-				return null;
-			}
-
-			set
-			{
-				int i;
-				if (this.containsKey (key)) {
-					for (i = 0; i < nrElem; i++) {
-						if (keys [i] == key)
-							values [i] = value;
-					}
-				} else {
-					Add (key, value);
-				}	
-			}
+		public void Add (K key, V value) {
+			elements.Add (key, value);
 		}
 
-		public override String ToString ()
-		{
-			String ListStr = "Variables: ";
-
-			foreach (var item in this)
-			{
-				ListStr += item.ToString ();
-				ListStr += ": ";
-				ListStr += this[item].ToString ();
-				ListStr += "; ";
-			}
-
-			return ListStr;
+		public bool containsKey (K key) {
+			return elements.ContainsKey (key);
 		}
 
 		public int Count {
-			get { return nrElem; }
+			get {
+				return elements.Count;
+			}
 		}
 
-		public void Add(object key, object value) 
-		{
-			keys[nrElem] = key;
-			values[nrElem++] = value;
+		public V this [K key] {
+			get {
+				if(elements.ContainsKey (key))
+					return elements [key];
+				throw new UndefinedKeyException ();
+			}
+			set {
+				elements [key] = value;
+			}
 		}
 
-		public Boolean containsKey(Object key) {
-			for (int i = 0; i < nrElem; i++) {
-				if (keys [i] == key)
-					return true;
-			}
-			return false;
+		public IEnumerator GetEnumerator () {
+			return elements.GetEnumerator ();
 		}
 
-		public IEnumerator GetEnumerator() {
-			return new ALEnumerator (this);
+		public override string ToString () {
+			string toString = "Variables: ";
+			foreach (K key in elements.Keys) {
+				toString += key + "=" + elements [key] + "; ";
+			}
+			return toString;
 		}
 
-		private class ALEnumerator : IEnumerator {
-			private int cursor;
-			private ArrayDictionary ad;
-
-			public ALEnumerator(ArrayDictionary ad) {
-				this.ad = ad;
-				cursor = -1;
-			}
-
-			public bool MoveNext() {
-				cursor++;
-				return cursor < ad.nrElem;
-			}
-
-			public Object Current {
-				get { return ad.keys [cursor]; }
-			}
-
-			public void Reset() {
-				cursor = -1;
-			}
-
-		}
-	}
+}
 }
 

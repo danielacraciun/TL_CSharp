@@ -3,12 +3,11 @@ using System.Linq;
 
 namespace ToyLanguage
 {
-	public interface IStack
-	{
-		Boolean isEmpty();
-		void Push(Object element);
-		Object Pop();
-		Object Top();
+	public interface IStack<T> {
+		int Count { get; }
+		T Pop();
+		T Peek();
+		void Push (T obj);
 	}
 }
 
