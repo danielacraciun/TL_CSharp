@@ -7,10 +7,15 @@ namespace ToyLanguage
 	{
 		public static void Main (string[] args)
 		{
-			IStack<IStmt> stk = new ArrayStack<IStmt> ();
-			IDictionary<String ,int> d = new ArrayDictionary<String, int> ();
-			IList<int> l = new ArrayList<int> ();
+			IRepository repo = new MyRepository();
+			MyController ctrl = new MyController(repo);
+			MyConsole console = new MyConsole(ctrl);
+			console.run();
 
+//			IStack<IStmt> stk = new ArrayStack<IStmt> ();
+//			IDictionary<String ,int> d = new ArrayDictionary<String, int> ();
+//			IList<int> l = new ArrayList<int> ();
+//
 			// The first example
 //			IStmt prg1 = new CmpStmt (new AssignStmt ("a", new ConstExp (0)), 
 //						 new AssignStmt ("b", new ArithmExp(new VarExp("a"), 
@@ -45,34 +50,34 @@ namespace ToyLanguage
 //			IStmt st6 = new PrintStmt(new VarExp("b"));
 //
 //			IStmt testprg = new CmpStmt (new CmpStmt(st1, st2), new CmpStmt(st5, st6));
-			IStmt prg1 = new CmpStmt(new AssignStmt("a", new ConstExp(0)),
-				new IfThenStmt(new LogicExp(new VarExp("a"), "!"), new PrintStmt(new VarExp("a"))));
-			IStmt prg2 = new CmpStmt (new AssignStmt ("a", new ConstExp(2)),
-				new WhileStmt(new LogicExp(new VarExp("a"), new ConstExp(2), "&&"),
-					new AssignStmt("a", new ArithmExp(new VarExp("a"), new ConstExp(1), '-'))));
-			IStmt swprg = new CmpStmt (new AssignStmt ("a", new ConstExp(1)),
-				new SwitchStmt(new VarExp("a"), new ConstExp(1), new PrintStmt(new ReadExp()),
-					new ConstExp(2), new PrintStmt(new ArithmExp(new VarExp("a"), new ConstExp(2), '/')),
-					new PrintStmt(new ConstExp(10))));
-			
-			stk.Push (swprg);
-			PrgState ps = new PrgState (stk, d, l);
-
-			IRepository repo = new MyRepository(new[] {ps});
-			MyController ctrl = new MyController(repo);
-			try {
-				ctrl.fullStep ();
-			} catch (UndefinedKeyException) {
-				Console.WriteLine("Cannot find variable.");
-			} catch (UninitializedVariableException) {
-				Console.WriteLine("A variable is not initialized.");
-			} catch (DivisionByZeroException) {
-				Console.WriteLine("Division by zero.");
-			} catch (RepositoryException) {
-				Console.WriteLine("Program state error.");
-			} catch (ControllerException) {
-				Console.WriteLine ("Empty state or error in stepping over program state.");
-			}
+//			IStmt prg1 = new CmpStmt(new AssignStmt("a", new ConstExp(0)),
+//				new IfThenStmt(new LogicExp(new VarExp("a"), "!"), new PrintStmt(new VarExp("a"))));
+//			IStmt prg2 = new CmpStmt (new AssignStmt ("a", new ConstExp(2)),
+//				new WhileStmt(new LogicExp(new VarExp("a"), new ConstExp(2), "&&"),
+//					new AssignStmt("a", new ArithmExp(new VarExp("a"), new ConstExp(1), '-'))));
+//			IStmt swprg = new CmpStmt (new AssignStmt ("a", new ConstExp(1)),
+//				new SwitchStmt(new VarExp("a"), new ConstExp(1), new PrintStmt(new ReadExp()),
+//					new ConstExp(2), new PrintStmt(new ArithmExp(new VarExp("a"), new ConstExp(2), '/')),
+//					new PrintStmt(new ConstExp(10))));
+//			
+//			stk.Push (swprg);
+//			PrgState ps = new PrgState (stk, d, l);
+//
+//			IRepository repo = new MyRepository(new[] {ps});
+//			MyController ctrl = new MyController(repo);
+//			try {
+//				ctrl.fullStep ();
+//			} catch (UndefinedKeyException) {
+//				Console.WriteLine("Cannot find variable.");
+//			} catch (UninitializedVariableException) {
+//				Console.WriteLine("A variable is not initialized.");
+//			} catch (DivisionByZeroException) {
+//				Console.WriteLine("Division by zero.");
+//			} catch (RepositoryException) {
+//				Console.WriteLine("Program state error.");
+//			} catch (ControllerException) {
+//				Console.WriteLine ("Empty state or error in stepping over program state.");
+//			}
 		}
 	}
 }

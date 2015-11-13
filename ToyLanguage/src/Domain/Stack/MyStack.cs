@@ -4,20 +4,20 @@ namespace ToyLanguage
 {
 	public class MyStack: IStack<IStmt>
 	{
-		private Object[] elem;
+		private IStmt[] elem;
 		private int nrElem;
 
 		public MyStack ()
 		{
-			elem = new Object[20];
+			elem = new IStmt[20];
 			nrElem = 0;
 		}
 
-		public void Push(Object o) {
+		public void Push(IStmt o) {
 			elem[nrElem++] = o;
 		}
 
-		public Object Pop() {
+		public IStmt Pop() {
 			if (nrElem > 0)
 				return elem[--nrElem];
 			return null;
@@ -27,12 +27,17 @@ namespace ToyLanguage
 			return nrElem == 0;
 		}
 
-		public Object Top() {
+		public IStmt Peek() {
 			if (nrElem > 0)
 				return elem[nrElem - 1];
 			return null;
 		}
 
+		public int Count {
+			get {
+				return nrElem;
+			}
+		}
 		public override String ToString ()
 		{
 			String ListStr = "Execution Stack: ";

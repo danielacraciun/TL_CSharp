@@ -16,7 +16,7 @@ namespace ToyLanguage
 
 		public PrgState getCrtPrgState() { return repo.getCrtPrg(); }
 
-		public void oneStepEval() {
+		public void oneStepEval(Boolean printFlag) {
 			try {
 			PrgState state = repo.getCrtPrg();
 
@@ -71,22 +71,22 @@ namespace ToyLanguage
 				IStmt switchStmt = new IfStmt(difSwitch, ifSwitch, stmt7.getCase2());
 				stk.Push(switchStmt);
 			}
-
-			Console.WriteLine(stk);
-			Console.WriteLine(symtbl);
-			Console.WriteLine(l);
-
+			if(printFlag) {
+				Console.WriteLine(stk);
+				Console.WriteLine(symtbl);
+				Console.WriteLine(l);
+			}
 			} catch (RepositoryException) {
 				throw new ControllerException ();
 			}
 		}
 
-		public void fullStep() {
+		public void fullStep(Boolean printFlag) {
 			try {
 			PrgState state = repo.getCrtPrg();
 			IStack<IStmt> stk = state.getExeStack ();
 			while (stk.Count != 0) {
-				oneStepEval ();
+				oneStepEval (printFlag);
 			}
 			} catch (RepositoryException) {
 				throw new ControllerException ();

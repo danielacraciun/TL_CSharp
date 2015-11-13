@@ -1,21 +1,22 @@
 ﻿using System;
+using System.Collections;
 
 namespace ToyLanguage
 {
 	public class MyDictionary: IDictionary<String, int>
 	{
-		private Object[] keys;
-		private Object[] values;
+		private String[] keys;
+		private int[] values;
 		private int nrElem;
 
 		public MyDictionary ()
 		{
-			keys = new Object[20];
-			values = new Object[20];
+			keys = new String[20];
+			values = new int[20];
 			nrElem = 0;
 		}
 
-		public object this[object key]
+		public int this[string key]
 		{
 			get
 			{   
@@ -24,7 +25,7 @@ namespace ToyLanguage
 						return values[i];
 				}
 
-				return null;
+				return 0;
 			}
 
 			set
@@ -33,10 +34,10 @@ namespace ToyLanguage
 				if (this.containsKey (key)) {
 					for (i = 0; i < nrElem; i++) {
 						if (keys [i] == key)
-							values [i] = value;
+							values [i] = (int)value;
 					}
 				} else {
-					Add (key, value);
+					Add (key, (int)value);
 				}	
 			}
 		}
@@ -49,7 +50,7 @@ namespace ToyLanguage
 			{
 				ListStr += item.ToString ();
 				ListStr += ": ";
-				ListStr += this[item].ToString ();
+				ListStr += this[(string)item].ToString ();
 				ListStr += "; ";
 			}
 
@@ -60,13 +61,13 @@ namespace ToyLanguage
 			get { return nrElem; }
 		}
 
-		public void Add(object key, object value) 
+		public void Add(String key, int value) 
 		{
 			keys[nrElem] = key;
 			values[nrElem++] = value;
 		}
 
-		public Boolean containsKey(Object key) {
+		public Boolean containsKey(String key) {
 			for (int i = 0; i < nrElem; i++) {
 				if (keys [i] == key)
 					return true;
@@ -80,9 +81,9 @@ namespace ToyLanguage
 
 		private class ALEnumerator : IEnumerator {
 			private int cursor;
-			private ArrayDictionary ad;
+			private MyDictionary ad;
 
-			public ALEnumerator(ArrayDictionary ad) {
+			public ALEnumerator(MyDictionary ad) {
 				this.ad = ad;
 				cursor = -1;
 			}

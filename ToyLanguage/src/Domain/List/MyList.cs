@@ -3,31 +3,27 @@ using System.Collections;
 
 namespace ToyLanguage
 {
-	public class MyList: IList<String>
+	public class MyList: IList<int>
 	{
-		private Object[] elem;
+		private int[] elem;
 		private int nrElem;
 
 		public MyList()
 		{
-			elem = new Object[20];
+			elem = new int[20];
 			nrElem = 0;
 		}
 
 
-		public void Add(Object o) {
+		public void Add(int o) {
 			elem [nrElem++] = o;
 		}
 
-		public Boolean Contains(Object o) {
+		public Boolean Contains(int o) {
 			for (int i = 0; i < nrElem; i++)
 				if (elem [i] == o)
 					return true;
 			return false;
-		}
-
-		public int Length {
-			get { return nrElem; }
 		}
 
 		public override String ToString ()
@@ -41,15 +37,21 @@ namespace ToyLanguage
 			return ListStr;
 		}
 
-		public Object this[int index] {
+		public int this[int index] {
 			get { 
 				if (index < nrElem && index >= 0)
 					return elem [index];
-				return null;
+				return 0;
 			}
 			set { 				
 				if (index < nrElem && index >= 0)
 					elem [index] = value;
+			}
+		}
+
+		public int Count {
+			get {
+				return elem.Length;
 			}
 		}
 
