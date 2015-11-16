@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class CmpStmt: IStmt
+	[Serializable] public class CmpStmt: IStmt
 	{
 		
 		private IStmt first;

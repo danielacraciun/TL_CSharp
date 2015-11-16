@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class LogicExp: Exp {
+	[Serializable] public class LogicExp: Exp {
 		private Exp e1;
 		private Exp e2;
 		private String cmp;

@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class WhileStmt: IStmt {
+	[Serializable] public class WhileStmt: IStmt {
 		private Exp exp;
 		private IStmt stmt;
 

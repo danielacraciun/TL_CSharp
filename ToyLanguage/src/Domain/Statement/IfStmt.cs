@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class IfStmt: IStmt
+	[Serializable] public class IfStmt: IStmt
 	{
 		private Exp exp;
 		private IStmt thenStmt;

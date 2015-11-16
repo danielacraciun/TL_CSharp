@@ -16,7 +16,7 @@ namespace ToyLanguage
 //			IDictionary<String ,int> d = new ArrayDictionary<String, int> ();
 //			IList<int> l = new ArrayList<int> ();
 //
-			// The first example
+////			 The first example
 //			IStmt prg1 = new CmpStmt (new AssignStmt ("a", new ConstExp (0)), 
 //						 new AssignStmt ("b", new ArithmExp(new VarExp("a"), 
 //															new ConstExp(2), '*')));
@@ -26,8 +26,8 @@ namespace ToyLanguage
 //						 new PrintStmt(new ArithmExp(new VarExp("b"), new VarExp("c"), '+')), 
 //						 new PrintStmt(new ArithmExp(new VarExp("b"), new VarExp("c"), '-')))
 //						 );
-
-			// The second example
+//
+////			 The second example
 //			IStmt prg3 = new CmpStmt (new AssignStmt ("x", new ConstExp (8)), 
 //									  new AssignStmt ("y", new ConstExp (12)));
 //			
@@ -37,7 +37,7 @@ namespace ToyLanguage
 //						 new PrintStmt(new VarExp("z")));
 //			//IStmt fprg = new CmpStmt (prg1, prg2);
 //			IStmt sprg = new CmpStmt (prg3, prg4);
-
+//
 //			IStmt st1 = new AssignStmt("a", new ConstExp(2));
 //			IStmt st2 = new AssignStmt("c", new ConstExp(5));
 //			Exp ex1 = new ArithmExp(new VarExp("a"), new ConstExp(12), '-');
@@ -50,23 +50,26 @@ namespace ToyLanguage
 //			IStmt st6 = new PrintStmt(new VarExp("b"));
 //
 //			IStmt testprg = new CmpStmt (new CmpStmt(st1, st2), new CmpStmt(st5, st6));
-//			IStmt prg1 = new CmpStmt(new AssignStmt("a", new ConstExp(0)),
-//				new IfThenStmt(new LogicExp(new VarExp("a"), "!"), new PrintStmt(new VarExp("a"))));
-//			IStmt prg2 = new CmpStmt (new AssignStmt ("a", new ConstExp(2)),
-//				new WhileStmt(new LogicExp(new VarExp("a"), new ConstExp(2), "&&"),
-//					new AssignStmt("a", new ArithmExp(new VarExp("a"), new ConstExp(1), '-'))));
-//			IStmt swprg = new CmpStmt (new AssignStmt ("a", new ConstExp(1)),
-//				new SwitchStmt(new VarExp("a"), new ConstExp(1), new PrintStmt(new ReadExp()),
-//					new ConstExp(2), new PrintStmt(new ArithmExp(new VarExp("a"), new ConstExp(2), '/')),
-//					new PrintStmt(new ConstExp(10))));
+////			IStmt prg1 = new CmpStmt(new AssignStmt("a", new ConstExp(0)),
+////				new IfThenStmt(new LogicExp(new VarExp("a"), "!"), new PrintStmt(new VarExp("a"))));
+////			IStmt prg2 = new CmpStmt (new AssignStmt ("a", new ConstExp(2)),
+////				new WhileStmt(new LogicExp(new VarExp("a"), new ConstExp(2), "&&"),
+////					new AssignStmt("a", new ArithmExp(new VarExp("a"), new ConstExp(1), '-'))));
+////			IStmt swprg = new CmpStmt (new AssignStmt ("a", new ConstExp(1)),
+////				new SwitchStmt(new VarExp("a"), new ConstExp(1), new PrintStmt(new ReadExp()),
+////					new ConstExp(2), new PrintStmt(new ArithmExp(new VarExp("a"), new ConstExp(2), '/')),
+////					new PrintStmt(new ConstExp(10))));
 //			
-//			stk.Push (swprg);
+//			stk.Push (testprg);
 //			PrgState ps = new PrgState (stk, d, l);
 //
 //			IRepository repo = new MyRepository(new[] {ps});
 //			MyController ctrl = new MyController(repo);
 //			try {
-//				ctrl.fullStep ();
+//				ctrl.oneStepEval (true);
+//				repo.serialize();
+//				PrgState prs = repo.deserialize();
+//				Console.WriteLine(prs);
 //			} catch (UndefinedKeyException) {
 //				Console.WriteLine("Cannot find variable.");
 //			} catch (UninitializedVariableException) {

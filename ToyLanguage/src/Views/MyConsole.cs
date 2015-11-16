@@ -6,17 +6,22 @@ namespace ToyLanguage
 	public class MyConsole {
 		private MyController ctrl;
 		private Boolean printFlag;
+		private Boolean logFlag;
+		private String filename;
 
 		public MyConsole(MyController ctrl) {
 			this.ctrl = ctrl;
-			printFlag = true;
+			this.printFlag = true;
+			this.logFlag = true;
+			this.filename = "default.txt";
 		}
 
 		private void mainMenu () {
 			Console.WriteLine("1. Input program");
 			Console.WriteLine("2. One Step");
 			Console.WriteLine("3. All Step");
-			Console.WriteLine("4. Set printFlag");
+			Console.WriteLine("4. Set print and log flags");
+			Console.WriteLine("5. Get last program state");
 			Console.WriteLine("Exit by pressing 0.");
 
 				Console.WriteLine("Option: ");
@@ -34,11 +39,19 @@ namespace ToyLanguage
 					case 4:
 						setFlag ();
 						break;
+					case 5:
+						getLastPrg ();
+						break;
 					case 0:
-						Console.WriteLine("Goodbye.");
+						Console.WriteLine ("Goodbye.");
+						return;
 						break;
 					}
 				mainMenu ();
+		}
+
+		public void getLastPrg () {
+			Console.WriteLine (ctrl.repoDeser());
 		}
 
 		public void run () {
@@ -46,16 +59,32 @@ namespace ToyLanguage
 		}
 
 		private void setFlag(){
-			this.printFlag = !this.printFlag;
-			Console.WriteLine("Flag changed. It is now " + this.printFlag.ToString() + ".");
-			Console.WriteLine("Press any key to go back.");
-			Console.ReadKey (true);
-			mainMenu();
+			Console.WriteLine("1. Change print flag\n2. Change log flag\n0 to return. ");
+			Console.WriteLine("Option: ");
+			int opt = Convert.ToInt32(Console.ReadLine());
+			switch (opt) {
+			case 1:
+				this.printFlag = !this.printFlag;
+				Console.WriteLine("Flag changed. It is now " + this.printFlag.ToString() + ".");
+				break;
+			case 2:
+				this.logFlag = !this.logFlag;
+				Console.WriteLine ("Flag changed. It is now " + this.logFlag.ToString () + ".");
+				if (logFlag) {
+					Console.WriteLine ("File to print log to:");
+					this.filename = Console.ReadLine ();
+				}
+				break;
+			case 0:
+				mainMenu ();
+				break;
+			}
 		}
 
 		private void fullStep(){
 			try {
-				ctrl.fullStep(printFlag);
+				ctrl.fullStep(printFlag, logFlag, this.filename);
+				ctrl.repoSer();
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -70,7 +99,8 @@ namespace ToyLanguage
 
 		private void oneStep() {
 			try {
-				ctrl.oneStepEval(printFlag);
+				ctrl.oneStepEval(printFlag, logFlag, this.filename);
+				ctrl.repoSer();
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");

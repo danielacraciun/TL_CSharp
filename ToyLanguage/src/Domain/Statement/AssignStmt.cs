@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class AssignStmt : IStmt
+	[Serializable] public class AssignStmt : IStmt
 	{
 		private String id;
 		private Exp exp;

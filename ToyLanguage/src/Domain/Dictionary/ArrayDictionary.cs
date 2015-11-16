@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ArrayDictionary<K, V>: IDictionary<K, V>
+	[Serializable] public class ArrayDictionary<K, V>: IDictionary<K, V>
 	{
 		private Dictionary<K, V> elements;
 

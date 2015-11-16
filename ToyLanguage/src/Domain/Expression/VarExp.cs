@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class VarExp: Exp
+	[Serializable] public class VarExp: Exp
 	{
 		private String id;
 

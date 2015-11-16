@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace ToyLanguage
 {
@@ -25,6 +28,26 @@ namespace ToyLanguage
 
 		public void add(PrgState ps) {
 			prgStates[nrPrg++] = ps;
+		}
+
+		public void serialize() {
+			IFormatter formatter = new BinaryFormatter( );
+			using (FileStream s = File.Create ("serialize.bin")) {
+				formatter.Serialize (s, this.getCrtPrg ());
+			}
+		}
+
+		public PrgState deserialize() {
+			IFormatter formatter = new BinaryFormatter( );
+			using (FileStream s = File.OpenRead ("serialize.bin")) {
+				return (PrgState)formatter.Deserialize (s);
+			}
+		}
+
+		public void writeToFile(String filename) {
+			using (StreamWriter w = File.AppendText(filename)) {
+				w.WriteLine(this.getCrtPrg());
+			}
 		}
 	}
 }

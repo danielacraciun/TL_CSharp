@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ReadExp: Exp {
+	[Serializable] public class ReadExp: Exp {
 
 		public int eval(IDictionary<String, int> tbl) {
 			Console.WriteLine("Input a number: ");

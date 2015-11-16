@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class IfThenStmt: IStmt {
+	[Serializable] public class IfThenStmt: IStmt {
 		private Exp exp;
 		private IStmt thenStmt;
 
@@ -11,7 +11,7 @@ namespace ToyLanguage
 			thenStmt = then;
 		}
 
-		public String toString() {
+		public String ToString() {
 			return "IF(" + exp.ToString() + ") THEN(" + 
 					thenStmt.ToString() + ")";
 		}

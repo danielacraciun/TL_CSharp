@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class SwitchStmt: IStmt {
+	[Serializable] public class SwitchStmt: IStmt {
 		private Exp op;
 		private Exp opCase1;
 		private IStmt case1;

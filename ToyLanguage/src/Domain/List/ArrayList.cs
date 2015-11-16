@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ArrayList<T>: IList<T>
+	[Serializable] public class ArrayList<T>: IList<T>
 	{
 		private List<T> elements;
 

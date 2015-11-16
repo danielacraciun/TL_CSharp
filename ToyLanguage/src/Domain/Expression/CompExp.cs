@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class CompExp: Exp
+	[Serializable] public class CompExp: Exp
 	{
 		private Exp e1;
 		private Exp e2;

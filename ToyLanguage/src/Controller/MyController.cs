@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ToyLanguage
 {
@@ -16,7 +17,7 @@ namespace ToyLanguage
 
 		public PrgState getCrtPrgState() { return repo.getCrtPrg(); }
 
-		public void oneStepEval(Boolean printFlag) {
+		public void oneStepEval(Boolean printFlag, Boolean logFlag, String filename) {
 			try {
 			PrgState state = repo.getCrtPrg();
 
@@ -71,27 +72,39 @@ namespace ToyLanguage
 				IStmt switchStmt = new IfStmt(difSwitch, ifSwitch, stmt7.getCase2());
 				stk.Push(switchStmt);
 			}
+
 			if(printFlag) {
-				Console.WriteLine(stk);
-				Console.WriteLine(symtbl);
-				Console.WriteLine(l);
+					Console.WriteLine(this.getCrtPrgState());
 			}
+
+			if(logFlag) {
+					this.repo.writeToFile(filename);
+			}
+
 			} catch (RepositoryException) {
 				throw new ControllerException ();
 			}
 		}
 
-		public void fullStep(Boolean printFlag) {
+		public void fullStep(Boolean printFlag, Boolean logFlag, String filename) {
 			try {
-			PrgState state = repo.getCrtPrg();
-			IStack<IStmt> stk = state.getExeStack ();
-			while (stk.Count != 0) {
-				oneStepEval (printFlag);
-			}
+				PrgState state = repo.getCrtPrg();
+				IStack<IStmt> stk = state.getExeStack ();
+				while (stk.Count != 0) {
+					oneStepEval (printFlag, logFlag, filename);
+				}
 			} catch (RepositoryException) {
 				throw new ControllerException ();
 			}
 
+		}
+
+		public void repoSer() {
+			repo.serialize ();
+		}
+
+		public PrgState repoDeser() {
+			return repo.deserialize ();
 		}
 	}
 }

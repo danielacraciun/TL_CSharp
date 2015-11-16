@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ToyLanguage
 {
-	public class ArrayStack<T>: IStack<T>
+	[Serializable] public class ArrayStack<T>: IStack<T>
 	{
 		private Stack<T> elements;
 

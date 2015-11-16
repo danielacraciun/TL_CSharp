@@ -55,7 +55,6 @@
     <Compile Include="src\Domain\PrgState\PrgState.cs" />
     <Compile Include="src\Repository\MyRepository.cs" />
     <Compile Include="src\Controller\MyController.cs" />
-    <Compile Include="src\Domain\Statement\DecStmt.cs" />
     <Compile Include="src\Domain\Expression\CompExp.cs" />
     <Compile Include="src\Repository\RepositoryException.cs" />
     <Compile Include="src\Views\MyConsole.cs" />

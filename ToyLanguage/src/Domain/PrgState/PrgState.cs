@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class PrgState
+	[Serializable] public class PrgState
 	{
 		public IStack<IStmt> exeStack;
 		public IDictionary<String ,int> symTable;
@@ -24,6 +24,11 @@ namespace ToyLanguage
 
 		public IList<int> getOut() {
 			return outList;
+		}
+
+		public override string ToString() {
+			return this.exeStack.ToString() + "\n" + this.symTable.ToString() + "\n" +
+				this.outList.ToString();
 		}
 	}
 }

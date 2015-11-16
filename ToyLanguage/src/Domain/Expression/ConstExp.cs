@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class ConstExp: Exp
+	[Serializable] public class ConstExp: Exp
 	{
 		private int nr;
 

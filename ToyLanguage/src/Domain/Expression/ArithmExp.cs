@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class ArithmExp: Exp
+	[Serializable] public class ArithmExp: Exp
 	{
 		private Exp e1;
 		private Exp e2;

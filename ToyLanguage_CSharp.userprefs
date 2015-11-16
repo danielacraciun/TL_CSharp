@@ -1,14 +1,6 @@
 ﻿<Properties StartupItem="ToyLanguage/ToyLanguage.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ToyLanguage/src/Domain/Dictionary/MyDictionary.cs">
-    <Files>
-      <File FileName="ToyLanguage/src/Domain/Dictionary/MyDictionary.cs" Line="6" Column="15" />
-      <File FileName="ToyLanguage/src/Domain/List/MyList.cs" Line="44" Column="13" />
-      <File FileName="ToyLanguage/Program.cs" Line="1" Column="1" />
-      <File FileName="ToyLanguage/src/Domain/List/IList.cs" Line="1" Column="1" />
-      <File FileName="ToyLanguage/src/Domain/List/ArrayList.cs" Line="29" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

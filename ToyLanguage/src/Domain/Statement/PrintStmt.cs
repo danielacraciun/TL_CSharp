@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class PrintStmt: IStmt
+	[Serializable] public class PrintStmt: IStmt
 	{
 		private Exp exp;
 
