@@ -21,7 +21,7 @@ namespace ToyLanguage
 			Console.WriteLine("2. One Step");
 			Console.WriteLine("3. All Step");
 			Console.WriteLine("4. Set print and log flags");
-			Console.WriteLine("5. Get last program state");
+			Console.WriteLine("5. Get initial program state");
 			Console.WriteLine("Exit by pressing 0.");
 
 				Console.WriteLine("Option: ");
@@ -40,7 +40,7 @@ namespace ToyLanguage
 						setFlag ();
 						break;
 					case 5:
-						getLastPrg ();
+						getInitPrg ();
 						break;
 					case 0:
 						Console.WriteLine ("Goodbye.");
@@ -50,7 +50,7 @@ namespace ToyLanguage
 				mainMenu ();
 		}
 
-		public void getLastPrg () {
+		public void getInitPrg () {
 			Console.WriteLine (ctrl.repoDeser());
 		}
 
@@ -84,7 +84,6 @@ namespace ToyLanguage
 		private void fullStep(){
 			try {
 				ctrl.fullStep(printFlag, logFlag, this.filename);
-				ctrl.repoSer();
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -100,7 +99,6 @@ namespace ToyLanguage
 		private void oneStep() {
 			try {
 				ctrl.oneStepEval(printFlag, logFlag, this.filename);
-				ctrl.repoSer();
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -122,6 +120,7 @@ namespace ToyLanguage
 
 			PrgState crtPrg = new PrgState(exeStk, tbl, outl);
 			ctrl.addPrgState(crtPrg);
+			ctrl.repoSer ();
 
 			try {
 				mainMenu();
