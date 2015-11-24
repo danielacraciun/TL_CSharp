@@ -11,7 +11,7 @@ namespace ToyLanguage
 			this.id = newid;
 		}
 
-		public int eval(IDictionary<String, int> tbl) {
+		public int eval(IDictionary<String, int> tbl, IHeap<int> h) {
 			if (tbl.containsKey(id)) return (int) tbl[id];
 			throw new UninitializedVariableException ();
 		}

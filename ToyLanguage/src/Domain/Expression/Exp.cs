@@ -4,7 +4,7 @@ namespace ToyLanguage
 {
 	public interface Exp
 	{
-		int eval (IDictionary<String, int> tbl);
+		int eval (IDictionary<String, int> tbl, IHeap<int> h);
 
 		String ToString ();
 	}

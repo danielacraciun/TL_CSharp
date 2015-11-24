@@ -49,6 +49,15 @@ namespace ToyLanguage
 					+ " case " + opCase2.ToString() + ": " + case2.ToString() 
 					+ " default: " + defaultCase.ToString();
 		}
+
+		public PrgState execute(PrgState state) {
+//			Exp difSwitch = new ArithmExp(op, opCase2, '-');
+//			Exp difSwitch2 = new ArithmExp(op, opCase1, '-');
+//			IStmt ifSwitch = new IfStmt(difSwitch2, defaultCase, case1);
+//			IStmt switchStmt = new IfStmt(difSwitch, ifSwitch, case2);
+//			state.getExeStack().push(switchStmt);
+			return state;
+		}
 	}
 }
 

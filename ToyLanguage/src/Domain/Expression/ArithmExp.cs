@@ -15,14 +15,14 @@ namespace ToyLanguage
 			this.op = op;
 		}
 
-		public int eval(IDictionary<String, int> tbl) {
-			if (op == '+') return (e1.eval(tbl) + e2.eval(tbl));
-			if (op == '-') return (e1.eval(tbl) - e2.eval(tbl));
-			if (op == '*') return (e1.eval(tbl) * e2.eval(tbl));
+		public int eval(IDictionary<String, int> tbl, IHeap<int> h) {
+			if (op == '+') return (e1.eval(tbl, h) + e2.eval(tbl, h));
+			if (op == '-') return (e1.eval(tbl, h) - e2.eval(tbl, h));
+			if (op == '*') return (e1.eval(tbl, h) * e2.eval(tbl, h));
 			if (op == '/') {
-				if (e2.eval (tbl) == 0)
+				if (e2.eval (tbl, h) == 0)
 					throw new DivisionByZeroException ();
-				return (e1.eval (tbl) / e2.eval (tbl));
+				return (e1.eval (tbl, h) / e2.eval (tbl, h));
 			}
 			return 0;
 		}

@@ -18,6 +18,11 @@ namespace ToyLanguage
 		public override String ToString() {
 			return "print(" + exp.ToString() + ")";
 		}
+
+		public PrgState execute(PrgState state) {
+			state.getOut().Add(exp.eval(state.getSymTable(), state.getHeap()));
+			return state;
+		}
 	}
 }
 

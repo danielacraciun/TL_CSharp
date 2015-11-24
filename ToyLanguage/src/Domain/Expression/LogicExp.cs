@@ -20,20 +20,20 @@ namespace ToyLanguage
 			this.cmp = cmp;
 		}
 
-		public int eval(IDictionary<String, int> tbl) {
+		public int eval(IDictionary<String, int> tbl, IHeap<int> h) {
 			switch (cmp) {
 			case "&&":
-				if (e1.eval(tbl) != 0 && e2.eval(tbl) != 0)
+				if (e1.eval(tbl, h) != 0 && e2.eval(tbl, h) != 0)
 					return 1;
 				else
 					return 0;
 			case "||":
-				if (e1.eval(tbl) != 0 || e2.eval(tbl) != 0)
+				if (e1.eval(tbl, h) != 0 || e2.eval(tbl, h) != 0)
 					return 1;
 				else
 					return 0;
 			case "!":
-				if (e1.eval(tbl) == 0)
+				if (e1.eval(tbl, h) == 0)
 					return 1;
 				else
 					return 0;

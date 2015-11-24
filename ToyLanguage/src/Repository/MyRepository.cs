@@ -12,7 +12,7 @@ namespace ToyLanguage
 
 		public MyRepository(PrgState[] states) {
 			prgStates = states;
-			nrPrg = 1;
+			nrPrg = 0;
 		}
 
 		public MyRepository() {
@@ -22,12 +22,13 @@ namespace ToyLanguage
 
 		public PrgState getCrtPrg() {
 			if (nrPrg > 0)
-				return this.prgStates [0];
+				return this.prgStates [nrPrg];
 			throw new RepositoryException ();
 		}
 
 		public void add(PrgState ps) {
-			prgStates[nrPrg++] = ps;
+			ps.setId (++nrPrg);
+			prgStates[nrPrg] = ps;
 		}
 
 		public void serialize() {

@@ -11,7 +11,7 @@ namespace ToyLanguage
 			this.nr = newnr;
 		}
 
-		public int eval(IDictionary<String, int> tbl) {
+		public int eval(IDictionary<String, int> tbl, IHeap<int> h) {
 			return nr;
 		}
 

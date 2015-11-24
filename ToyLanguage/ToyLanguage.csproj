@@ -74,6 +74,11 @@
     <Compile Include="src\Domain\Dictionary\MyDictionary.cs" />
     <Compile Include="src\Domain\List\MyList.cs" />
     <Compile Include="src\Domain\Stack\MyStack.cs" />
+    <Compile Include="src\Domain\Heap\IHeap.cs" />
+    <Compile Include="src\Domain\Heap\MyHeap.cs" />
+    <Compile Include="src\Domain\Statement\NewStmt.cs" />
+    <Compile Include="src\Domain\Statement\WriteHeapStmt.cs" />
+    <Compile Include="src\Domain\Expression\ReadHeapExp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -83,5 +88,6 @@
     <Folder Include="src\Controller\" />
     <Folder Include="src\Domain\PrgState\" />
     <Folder Include="src\Views\" />
+    <Folder Include="src\Domain\Heap\" />
   </ItemGroup>
 </Project>

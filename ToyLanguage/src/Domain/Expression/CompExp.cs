@@ -15,34 +15,34 @@ namespace ToyLanguage
 			this.cmp = cmp;
 		}
 
-		public int eval(IDictionary<String, int> tbl) {
+		public int eval(IDictionary<String, int> tbl, IHeap<int> h) {
 			if (cmp == "<") {
-				if (e1.eval(tbl) < e2.eval(tbl))
+				if (e1.eval(tbl, h) < e2.eval(tbl, h))
 					return 1;
 				else
 					return 0;
 			} else if (cmp == "<="){
-				if(e1.eval(tbl) <= e2.eval(tbl))
+				if(e1.eval(tbl, h) <= e2.eval(tbl, h))
 					return 1;
 				else
 					return 0;
 			} else if (cmp == "=="){
-				if(e1.eval(tbl) == e2.eval(tbl))
+				if(e1.eval(tbl, h) == e2.eval(tbl, h))
 					return 1;
 				else
 					return 0;
 			} else if (cmp == "!="){
-				if(e1.eval(tbl) != e2.eval(tbl))
+				if(e1.eval(tbl, h) != e2.eval(tbl, h))
 					return 1;
 				else
 					return 0;
 			} else if (cmp == ">"){
-				if(e1.eval(tbl) > e2.eval(tbl))
+				if(e1.eval(tbl, h) > e2.eval(tbl, h))
 					return 1;
 				else
 					return 0;
 			} else if (cmp == ">="){
-				if(e1.eval(tbl) <= e2.eval(tbl))
+				if(e1.eval(tbl, h) <= e2.eval(tbl, h))
 					return 1;
 				else
 					return 0;

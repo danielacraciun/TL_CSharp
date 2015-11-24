@@ -11,9 +11,14 @@ namespace ToyLanguage
 			thenStmt = then;
 		}
 
-		public String ToString() {
+		public override String ToString() {
 			return "IF(" + exp.ToString() + ") THEN(" + 
 					thenStmt.ToString() + ")";
+		}
+
+		public PrgState execute(PrgState state) {
+			state.getExeStack().Push(new IfStmt(exp, thenStmt, new SkipStmt()));
+			return state;
 		}
 
 		public Exp getExp() {

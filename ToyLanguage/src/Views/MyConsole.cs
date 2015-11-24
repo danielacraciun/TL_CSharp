@@ -8,6 +8,7 @@ namespace ToyLanguage
 		private Boolean printFlag;
 		private Boolean logFlag;
 		private String filename;
+		private PrgState CrtPs;
 
 		public MyConsole(MyController ctrl) {
 			this.ctrl = ctrl;
@@ -45,7 +46,6 @@ namespace ToyLanguage
 					case 0:
 						Console.WriteLine ("Goodbye.");
 						return;
-						break;
 					}
 				mainMenu ();
 		}
@@ -83,7 +83,7 @@ namespace ToyLanguage
 
 		private void fullStep(){
 			try {
-				ctrl.fullStep(printFlag, logFlag, this.filename);
+				ctrl.fullStep(CrtPs, printFlag, logFlag, this.filename);
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -98,7 +98,7 @@ namespace ToyLanguage
 
 		private void oneStep() {
 			try {
-				ctrl.oneStepEval(printFlag, logFlag, this.filename);
+				ctrl.oneStepEval(CrtPs, printFlag, logFlag, this.filename);
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -116,10 +116,12 @@ namespace ToyLanguage
 			IStack<IStmt> exeStk = new ArrayStack<IStmt>();
 			IDictionary<String, int> tbl = new ArrayDictionary<String, int>();
 			IList<int> outl = new ArrayList<int>();
+			IHeap<int> h = new MyHeap<int>();
 			exeStk.Push(prgStmt);
 
-			PrgState crtPrg = new PrgState(exeStk, tbl, outl);
+			PrgState crtPrg = new PrgState(exeStk, tbl, outl, h);
 			ctrl.addPrgState(crtPrg);
+			CrtPs = crtPrg;
 			ctrl.repoSer ();
 
 			try {
@@ -143,6 +145,8 @@ namespace ToyLanguage
 			Console.WriteLine("6. Skip statement");
 			Console.WriteLine("7. If/then statement");
 			Console.WriteLine("8. Switch statement");
+			Console.WriteLine("9. New statement");
+			Console.WriteLine("10. Write to heap statement");
 
 
 			int opt = Convert.ToInt32(Console.ReadLine());
@@ -213,10 +217,25 @@ namespace ToyLanguage
 
 				st = new SwitchStmt(expr, expCase1, case1, expCase2, case2, caseDefault);
 				break;
+			case 9:
+				Console.WriteLine("Variable name:");
+				String newVar = Console.ReadLine();
+				Console.WriteLine("Assigned expression:");
+				Exp exp9 = addNewExp();
+				st = new NewStmt(newVar, exp9);
+				break;
+			case 10:
+				Console.WriteLine("Variable name:");
+				String heapVar = Console.ReadLine();
+				Console.WriteLine("Assigned expression:");
+				Exp exp10 = addNewExp();
+				st = new WriteHeapStmt(heapVar, exp10);
+				break;
 			default:
 				Console.WriteLine ("Please try one of the options above.");
 				st = addNewStmt ();
 				break;
+
 			}
 
 			return st;
@@ -230,6 +249,7 @@ namespace ToyLanguage
 			Console.WriteLine("4. Comparison expression");
 			Console.WriteLine("5. Logical expression");
 			Console.WriteLine("6. Read expression");
+			Console.WriteLine("7. Read heap expression");
 
 			int opt = Convert.ToInt32(Console.ReadLine());
 
@@ -299,6 +319,11 @@ namespace ToyLanguage
 				break;
 			case 6:
 				expr = new ReadExp();
+				break;
+			case 7:
+				Console.WriteLine ("Variable name:");
+				String varNew = Console.ReadLine ();
+				expr = new ReadHeapExp(varNew);
 				break;
 			default:
 				Console.WriteLine("Please try one of the options above.");

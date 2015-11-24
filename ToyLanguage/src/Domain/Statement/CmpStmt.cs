@@ -25,5 +25,11 @@ namespace ToyLanguage
 		public override String ToString() {
 			return "(" + first.ToString() + ";" + second.ToString() + ")";
 		}
+
+		public PrgState execute(PrgState state) {
+			state.getExeStack().Push(second);
+			state.getExeStack().Push(first);
+			return state;
+		}
 	}
 }

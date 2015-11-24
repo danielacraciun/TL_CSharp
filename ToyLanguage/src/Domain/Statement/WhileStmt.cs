@@ -23,6 +23,14 @@ namespace ToyLanguage
 			return "While( " + exp.ToString() + ") { " 
 					+ stmt.ToString() + " }";
 		}
+
+		public PrgState execute(PrgState state) {
+			if (exp.eval(state.getSymTable(), state.getHeap()) != 0) {
+				state.getExeStack().Push(this);
+				state.getExeStack().Push(stmt);
+			}
+			return state;
+		}
 	}
 }
 

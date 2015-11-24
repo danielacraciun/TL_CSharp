@@ -19,6 +19,15 @@ namespace ToyLanguage
 					+ ")ELSE(" + elseStmt.ToString() + ")";
 		}
 
+		public PrgState execute(PrgState state) {
+			int result = exp.eval(state.getSymTable(), state.getHeap());
+			if (result != 0)
+				state.getExeStack().Push(thenStmt);
+			else
+				state.getExeStack().Push(elseStmt);
+			return state;
+		}
+
 		public Exp getExp() {
 			return exp;
 		}

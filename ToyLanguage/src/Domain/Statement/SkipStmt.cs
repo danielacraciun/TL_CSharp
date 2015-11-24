@@ -7,6 +7,10 @@ namespace ToyLanguage
 		public override String ToString() {
 			return "skip";
 		}
+
+		public PrgState execute(PrgState state){
+			return state;
+		}
 	}
 }
 

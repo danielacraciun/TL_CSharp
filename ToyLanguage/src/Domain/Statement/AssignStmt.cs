@@ -24,5 +24,10 @@ namespace ToyLanguage
 		public override String ToString() {
 			return id + " = " + exp.ToString();
 		}
+
+		public PrgState execute(PrgState state) {
+			state.getSymTable().Add(id, exp.eval(state.getSymTable(), state.getHeap()));
+			return state;
+		}
 	}
 }
