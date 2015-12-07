@@ -12,7 +12,7 @@ namespace ToyLanguage
 
 		public MyRepository(PrgState[] states) {
 			prgStates = states;
-			nrPrg = 0;
+			nrPrg = states.Length;
 		}
 
 		public MyRepository() {

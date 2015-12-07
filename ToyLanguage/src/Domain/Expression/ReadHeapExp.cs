@@ -2,7 +2,7 @@
 
 namespace ToyLanguage
 {
-	public class ReadHeapExp: Exp
+	[Serializable] public class ReadHeapExp: Exp
 	{
 		private String id;
 

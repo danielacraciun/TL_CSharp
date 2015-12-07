@@ -1,8 +1,16 @@
 ﻿<Properties StartupItem="ToyLanguage/ToyLanguage.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ToyLanguage/src/Controller/MyController.cs">
     <Files>
-      <File FileName="ToyLanguage/src/Controller/MyController.cs" Line="1" Column="1" />
+      <File FileName="ToyLanguage/src/Domain/Expression/ReadHeapExp.cs" Line="5" Column="17" />
+      <File FileName="ToyLanguage/src/Views/MyConsole.cs" Line="1" Column="1" />
+      <File FileName="ToyLanguage/src/Repository/MyRepository.cs" Line="37" Column="1" />
+      <File FileName="ToyLanguage/src/Domain/Statement/NewStmt.cs" Line="1" Column="1" />
+      <File FileName="ToyLanguage/src/Domain/Statement/WriteHeapStmt.cs" Line="1" Column="1" />
+      <File FileName="ToyLanguage/src/Domain/Statement/WhileStmt.cs" Line="1" Column="1" />
+      <File FileName="ToyLanguage/src/Domain/PrgState/PrgState.cs" Line="15" Column="12" />
+      <File FileName="ToyLanguage/src/Domain/Heap/MyHeap.cs" Line="18" Column="25" />
+      <File FileName="ToyLanguage/src/Controller/MyController.cs" Line="41" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

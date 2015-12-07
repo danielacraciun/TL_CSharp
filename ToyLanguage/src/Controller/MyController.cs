@@ -37,6 +37,8 @@ namespace ToyLanguage
 
 			} catch (RepositoryException) {
 				throw new ControllerException ();
+			} catch (SystemException) {
+				throw new ControllerException ();
 			}
 			return state;
 		}

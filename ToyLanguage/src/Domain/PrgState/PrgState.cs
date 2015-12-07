@@ -4,6 +4,7 @@ namespace ToyLanguage
 {
 	[Serializable] public class PrgState
 	{
+		static private int id_gen = 0;
 		private int state_id;
 		private IStack<IStmt> exeStack;
 		private IDictionary<String ,int> symTable;
@@ -11,6 +12,7 @@ namespace ToyLanguage
 		private IHeap<int> h;
 
 		public PrgState(IStack<IStmt> stack, IDictionary<String, int> symbol_table, IList<int> output, IHeap<int> hp) {
+			state_id = id_gen++;
 			exeStack = stack;
 			symTable = symbol_table;
 			outList = output;
