@@ -19,8 +19,34 @@ namespace ToyLanguage
 			h = hp;
 		}
 
+		public PrgState(IStack<IStmt> stack, IDictionary<String, int> symbol_table, 
+			IList<int> output, IHeap<int> hp, int id) {
+			state_id = id;
+			exeStack = stack;
+			symTable = symbol_table;
+			outList = output;
+			h = hp;
+		}
+
+		public bool NotCompleted() {
+			return exeStack.Count != 0;
+		}
+
+		public PrgState OneStep() {
+			if (exeStack.Count == 0) {
+				throw new ModelException();
+			} else {
+				IStmt crtStmt = exeStack.Pop();
+				return crtStmt.execute(this);
+			}
+		}
+
 		public void setId(int id) {
 			state_id = id;
+		}
+
+		public int getId(){
+			return this.state_id;
 		}
 
 		public IStack<IStmt> getExeStack() {

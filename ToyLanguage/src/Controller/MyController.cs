@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ToyLanguage
 {
@@ -15,47 +18,42 @@ namespace ToyLanguage
 			repo.add(p);
 		}
 
-		public PrgState getCrtPrgState() { return repo.getCrtPrg(); }
-
-		public PrgState oneStepEval(PrgState state, Boolean printFlag, Boolean logFlag, String filename) {
-			try {
-				if(printFlag) {
-					Console.WriteLine(state);
-				}
-
-				if(logFlag) {
-					this.repo.writeToFile(filename);
-				}
-
-				if (state.getExeStack().Count == 0) {
-					Console.WriteLine("Program has finished execution.");
-				} else {
-					IStack<IStmt> stk = state.getExeStack();
-					IStmt crtStmt = stk.Pop();
-					return crtStmt.execute(state);
-				}
-
-			} catch (RepositoryException) {
-				throw new ControllerException ();
-			} 
-			return state;
+		public List<PrgState> getPrgStates() {
+			return repo.getPrgList ();
 		}
 
-		public void fullStep(PrgState state, Boolean printFlag, Boolean logFlag, String filename) {
-			try {
-				IStack<IStmt> stk = state.getExeStack ();
-				while (stk.Count != 0) {
-					oneStepEval (state, printFlag, logFlag, filename);
-				}
-			} catch (RepositoryException) {
-				throw new ControllerException ();
-			}
+		public List<PrgState> removeCompletedPrg(List<PrgState> inPrgList) {
+			return inPrgList.Where (p => p.NotCompleted ()).ToList();
+		}
+
+		public void oneStepForAllPrg(List<PrgState> prgList, Boolean printFlag, Boolean logFlag, String filename) {
+
+			List<Task<PrgState>> taskList = 
+				(from prg in prgList
+					select Task<PrgState>.Factory.StartNew(() => prg.OneStep())).ToList();
+
+			List<PrgState> newPrgList = (from tsk in taskList
+				where tsk.Result != null
+				select tsk.Result).ToList();
+			
+			newPrgList.AddRange (prgList.Where (p => !newPrgList.Any (q => q.getId() == p.getId())).ToList ());
+			repo.setPrgList(newPrgList);
+
 			if(printFlag) {
-				Console.WriteLine(state);
+				foreach (PrgState p in prgList)
+					Console.WriteLine(p);
 			}
 
 			if(logFlag) {
 				this.repo.writeToFile(filename);
+			}
+		}
+
+		public void fullStep(Boolean printFlag, Boolean logFlag, String filename) {
+			while(true){
+				List<PrgState> prgList = removeCompletedPrg(repo.getPrgList());
+				if(prgList.Count == 0) return;
+				else oneStepForAllPrg(prgList, printFlag, logFlag, filename);
 			}
 		}
 

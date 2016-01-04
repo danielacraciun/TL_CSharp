@@ -2,39 +2,38 @@
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections.Generic;
 
 namespace ToyLanguage
 {
 	public class MyRepository: IRepository
 	{
-		private PrgState[] prgStates;
+		private List<PrgState> prgStates;
 		private int nrPrg;
 
-		public MyRepository(PrgState[] states) {
-			prgStates = states;
-			nrPrg = states.Length;
-		}
-
 		public MyRepository() {
-			prgStates = new PrgState[20];
+			prgStates = new List<PrgState> ();
 			nrPrg = 0;
 		}
 
-		public PrgState getCrtPrg() {
-			if (nrPrg > 0)
-				return this.prgStates [nrPrg];
-			throw new RepositoryException ();
+		public List<PrgState> getPrgList() {
+			return this.prgStates;
+		}
+
+		public void setPrgList(List<PrgState> states) {
+			prgStates = states;
+			nrPrg = states.Count;		
 		}
 
 		public void add(PrgState ps) {
-			ps.setId (++nrPrg);
-			prgStates[nrPrg] = ps;
+			ps.setId (nrPrg++);
+			prgStates.Add (ps);
 		}
 
 		public void serialize() {
 			IFormatter formatter = new BinaryFormatter( );
 			using (FileStream s = File.Create ("serialize.bin")) {
-				formatter.Serialize (s, this.getCrtPrg ());
+				formatter.Serialize (s, this.getPrgList()[0]);
 			}
 		}
 
@@ -47,7 +46,7 @@ namespace ToyLanguage
 
 		public void writeToFile(String filename) {
 			using (StreamWriter w = File.AppendText(filename)) {
-				w.WriteLine(this.getCrtPrg());
+				w.WriteLine(this.prgStates);
 			}
 		}
 	}

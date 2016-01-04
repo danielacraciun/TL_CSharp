@@ -12,6 +12,10 @@ namespace ToyLanguage
 			elements = new Dictionary<K, V> ();
 		}
 
+		public ArrayDictionary (ArrayDictionary<K, V> oldDict) {
+			elements = new Dictionary<K, V> (oldDict.elements);
+		}
+
 		public void Add (K key, V value) {
 			if(elements.ContainsKey(key)) {
 				elements[key] = value;

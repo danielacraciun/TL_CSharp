@@ -8,7 +8,6 @@ namespace ToyLanguage
 		private Boolean printFlag;
 		private Boolean logFlag;
 		private String filename;
-		private PrgState CrtPs;
 
 		public MyConsole(MyController ctrl) {
 			this.ctrl = ctrl;
@@ -45,7 +44,8 @@ namespace ToyLanguage
 						break;
 					case 0:
 						Console.WriteLine ("Goodbye.");
-						return;
+						System.Environment.Exit (1);
+						break;
 					}
 				mainMenu ();
 		}
@@ -83,7 +83,7 @@ namespace ToyLanguage
 
 		private void fullStep(){
 			try {
-				ctrl.fullStep(CrtPs, printFlag, logFlag, this.filename);
+				ctrl.fullStep(printFlag, logFlag, this.filename);
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -98,7 +98,7 @@ namespace ToyLanguage
 
 		private void oneStep() {
 			try {
-				ctrl.oneStepEval(CrtPs, printFlag, logFlag, this.filename);
+				ctrl.oneStepForAllPrg(ctrl.getPrgStates(), printFlag, logFlag, this.filename);
 				mainMenu();
 			} catch (ControllerException) {
 				Console.WriteLine("Step evaluation error.");
@@ -111,8 +111,19 @@ namespace ToyLanguage
 			}
 		}
 
-		private void addProgram(){
-			IStmt prgStmt = addNewStmt();
+		private void addProgram() {
+			IStmt st1 = new AssignStmt("v", new ConstExp(10));
+			IStmt st2 = new NewStmt("a", new ConstExp(22));
+			IStmt st3 = new AssignStmt("v", new ConstExp(32));
+			IStmt st4 = new PrintStmt(new VarExp("v"));
+			IStmt st5 = new PrintStmt(new ReadHeapExp("a"));
+			IStmt st8 = new ForkStmt(new CmpStmt(new WriteHeapStmt("a", new ConstExp(30)),
+				new CmpStmt(st3, new CmpStmt(st4, st5))));
+			IStmt st6 = new PrintStmt(new VarExp("v"));
+			IStmt st7 = new PrintStmt(new ReadHeapExp("a"));
+			IStmt prgStmt = new CmpStmt(st1, new CmpStmt(st2,
+				new CmpStmt(st8, new CmpStmt(st6, st7))));
+			//IStmt prgStmt = addNewStmt();
 			IStack<IStmt> exeStk = new ArrayStack<IStmt>();
 			IDictionary<String, int> tbl = new ArrayDictionary<String, int>();
 			IList<int> outl = new ArrayList<int>();
@@ -121,7 +132,6 @@ namespace ToyLanguage
 
 			PrgState crtPrg = new PrgState(exeStk, tbl, outl, h);
 			ctrl.addPrgState(crtPrg);
-			CrtPs = crtPrg;
 			ctrl.repoSer ();
 
 			try {

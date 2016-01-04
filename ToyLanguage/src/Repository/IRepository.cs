@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ToyLanguage
 {
 	public interface IRepository
 	{
-		PrgState getCrtPrg();
+		List<PrgState> getPrgList();
+		void setPrgList(List<PrgState> states);
 		void add(PrgState o);
 		void serialize();
 		PrgState deserialize();
