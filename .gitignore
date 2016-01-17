@@ -31,6 +31,8 @@ Thumbs.db
 *.userprefs
 Properties/
 *.csproj
+*.stetic
+gtk-gui/
 bin/
 obj/
 

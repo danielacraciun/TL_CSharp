@@ -28,7 +28,9 @@ namespace ToyLanguage
 
 		protected void okBtnClicked (object sender, EventArgs e)
 		{
-			source.CrtText = TextEntry.Text;
+			if (source != null) {
+				source.CrtText = TextEntry.Text;
+			}
 			this.Hide ();
 		}
 	}

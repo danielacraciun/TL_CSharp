@@ -48,24 +48,32 @@ namespace ToyLanguage
 
 		public void oneStepForAllPrg(List<PrgState> prgList) {
 
+			try {
 			List<Task<PrgState>> taskList = 
 				(from prg in prgList
-					select Task<PrgState>.Factory.StartNew(() => prg.OneStep())).ToList();
-
+					select Task<PrgState>.Factory.StartNew(() => prg.OneStep()))
+					.ToList();
+			
 			List<PrgState> newPrgList = (from tsk in taskList
 				where tsk.Result != null
 				select tsk.Result).ToList();
 			
-			newPrgList.AddRange (prgList.Where (p => !newPrgList.Any (q => q.getId() == p.getId())).ToList ());
+			newPrgList.AddRange (prgList.Where (p => !newPrgList.Any 
+								(q => q.getId() == p.getId())).ToList ());
 			repo.setPrgList(newPrgList);
 
 			foreach (PrgState p in prgList) {
-				controllerOutput += p.ToString (); 
-				controllerOutput += "\n";
+				controllerOutput += p.ToString () + "\n"; 
 			}
 
 			if(logFlag) {
 				this.repo.writeToFile(filename);
+			}
+
+			} catch (DivisionByZeroException) {
+				throw new ControllerException ();
+			} catch (UninitializedVariableException) {
+				throw new ControllerException ();
 			}
 		}
 

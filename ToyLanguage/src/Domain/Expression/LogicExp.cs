@@ -41,7 +41,7 @@ namespace ToyLanguage
 			return 0;
 		}
 
-		public String toString() {
+		public override String ToString() {
 			if(! (cmp == "!")) {
 				return e1.ToString() + " " + cmp + " " + e2.ToString();
 			} else {
