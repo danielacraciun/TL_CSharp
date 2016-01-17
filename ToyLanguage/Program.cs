@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections;
+using Gtk;
+using System.Collections.Generic;
 
 namespace ToyLanguage
 {
@@ -7,10 +8,15 @@ namespace ToyLanguage
 	{
 		public static void Main (string[] args)
 		{
-			IRepository repo = new MyRepository();
-			MyController ctrl = new MyController(repo);
-			MyConsole console = new MyConsole(ctrl);
-			console.run();
+			Application.Init ();
+			MainWindow win = new MainWindow ();
+
+			IRepository repo = new MyRepository ();
+			MyController ctrl = new MyController (repo);
+			win.Ctrl = ctrl;
+
+			win.Show ();
+			Application.Run ();
 		}
 	}
 }

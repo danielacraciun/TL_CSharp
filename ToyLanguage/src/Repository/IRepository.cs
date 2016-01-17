@@ -9,7 +9,7 @@ namespace ToyLanguage
 		void setPrgList(List<PrgState> states);
 		void add(PrgState o);
 		void serialize();
-		PrgState deserialize();
+		void deserialize();
 		void writeToFile(String filename);
 	}
 }

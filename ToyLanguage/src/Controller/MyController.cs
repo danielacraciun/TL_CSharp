@@ -9,9 +9,29 @@ namespace ToyLanguage
 	public class MyController
 	{
 		private IRepository repo;
+		private String controllerOutput;
+		private String filename;
+		private bool logFlag;
 
 		public MyController(IRepository r) {
 			repo = r;
+			controllerOutput = "";
+			filename = "data.txt";
+			logFlag = false;
+		}
+
+		public String ControllerOutput {
+			get { return controllerOutput; }
+			set { controllerOutput = value; }
+		}
+
+		public bool LogFlag {
+			get {
+				return logFlag;
+			}
+			set {
+				logFlag = value;
+			}
 		}
 
 		public void addPrgState(PrgState p) {
@@ -26,7 +46,7 @@ namespace ToyLanguage
 			return inPrgList.Where (p => p.NotCompleted ()).ToList();
 		}
 
-		public void oneStepForAllPrg(List<PrgState> prgList, Boolean printFlag, Boolean logFlag, String filename) {
+		public void oneStepForAllPrg(List<PrgState> prgList) {
 
 			List<Task<PrgState>> taskList = 
 				(from prg in prgList
@@ -39,9 +59,9 @@ namespace ToyLanguage
 			newPrgList.AddRange (prgList.Where (p => !newPrgList.Any (q => q.getId() == p.getId())).ToList ());
 			repo.setPrgList(newPrgList);
 
-			if(printFlag) {
-				foreach (PrgState p in prgList)
-					Console.WriteLine(p);
+			foreach (PrgState p in prgList) {
+				controllerOutput += p.ToString (); 
+				controllerOutput += "\n";
 			}
 
 			if(logFlag) {
@@ -49,20 +69,29 @@ namespace ToyLanguage
 			}
 		}
 
-		public void fullStep(Boolean printFlag, Boolean logFlag, String filename) {
+		public void fullStep() {
 			while(true){
 				List<PrgState> prgList = removeCompletedPrg(repo.getPrgList());
 				if(prgList.Count == 0) return;
-				else oneStepForAllPrg(prgList, printFlag, logFlag, filename);
+				else oneStepForAllPrg(prgList);
 			}
+		}
+
+		public bool allCompleted () {
+			foreach (PrgState p in this.getPrgStates()) {
+				if (p.NotCompleted()) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		public void repoSer() {
 			repo.serialize ();
 		}
 
-		public PrgState repoDeser() {
-			return repo.deserialize ();
+		public void repoDeser() {
+			repo.deserialize ();
 		}
 	}
 }

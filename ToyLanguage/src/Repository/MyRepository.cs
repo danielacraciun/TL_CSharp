@@ -37,10 +37,11 @@ namespace ToyLanguage
 			}
 		}
 
-		public PrgState deserialize() {
+		public void deserialize() {
 			IFormatter formatter = new BinaryFormatter( );
 			using (FileStream s = File.OpenRead ("serialize.bin")) {
-				return (PrgState)formatter.Deserialize (s);
+				this.prgStates = new List<PrgState> ();
+				this.prgStates.Add((PrgState)formatter.Deserialize (s));
 			}
 		}
 
